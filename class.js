@@ -7,6 +7,8 @@ export default class ProductManager{
 
     read = async (file) =>{
         let productsArray = []
+        console.log(productsArray);
+        console.log(file);
         try{
             productsArray = JSON.parse(await fs.readFile(file, 'utf-8'));
         } catch (err){
@@ -28,7 +30,7 @@ export default class ProductManager{
             const products = await this.read();
             newObj.id = products.length+1
             products.push({...newObj})
-            await this.write(JSON.stringify(file, products, null, 2))
+            await this.write(file, JSON.stringify(products, null, 2))
             return newObj.id
         } catch (err) {
             console.log(err)
